@@ -9,6 +9,10 @@ import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 
+import Constants from "expo-constants";
+console.log("TMDB KEY IN PRODUCTION:", Constants.expoConfig?.extra?.EXPO_PUBLIC_TMDB_API_KEY);
+
+
 export default function Index() {
   const router = useRouter();
   const { data: trendingMovies, loading: trendingLoading, error: trendingError } = useFetch(getTrendingMovies);
@@ -32,7 +36,12 @@ export default function Index() {
 
         />) :
           moviesError || trendingError ? (
-            <Text> {moviesError?.message || trendingError?.message}</Text>
+            //   <Text> {moviesError?.message || trendingError?.message}</Text>
+            <View className="flex-1 justify-center items-center ">
+              <Text className="text-gray-500 text-base ">
+                {moviesError?.message || trendingError?.message}
+              </Text>
+            </View>
           )
             : (<View
               className="flex-1 mt-5"

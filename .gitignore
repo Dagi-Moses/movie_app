@@ -45,3 +45,4 @@ dist/
 build/
 *.log
 
+keystore.jks

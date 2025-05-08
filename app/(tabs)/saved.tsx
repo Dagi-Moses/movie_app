@@ -87,7 +87,7 @@ export default function Saved() {
                 </>
               ) : (
                 <View className="flex-1 justify-center items-center ">
-                  <Text className="text-white text-base font-semibold opacity-70">
+                  <Text className="text-gray-500 text-base ">
                     You have no saved movies yet.
                   </Text>
                 </View>

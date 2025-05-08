@@ -1,66 +1,69 @@
-import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import {Tabs} from 'expo-router'
-import {images} from "@/constants/images";
-import {icons} from "@/constants/icons";
+import { Tabs } from 'expo-router'
+import { images } from "@/constants/images";
+import { icons } from "@/constants/icons";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const TabIcon = ({focused, icon , title}) => {
-   if(focused){
+const TabIcon = ({ focused, icon, title }) => {
+    if (focused) {
+        return (
+            <ImageBackground
+                source={images.highlight}
+                className="flex flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden"
+            >
+                <Image
+                    source={icon}
+                    tintColor="#151312" className="size-5"
+                />
+                <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
+            </ImageBackground>
+        )
+    }
+
     return (
-        <ImageBackground
-            source={images.highlight}
-            className="flex flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden"
-        >
-            <Image
-                source={icon
-                }
-                tintColor="#151312" className="size-5"
-            />
-            <Text className="text-secondary text-base font-semibold ml-2">{title}</Text>
-        </ImageBackground>
-    )}
 
-   return (
-
-       <View className=" size-full justify-center items-center mt-4 rounded-full">
-<Image source={icon} tintColor='#a8b5db' className="size-5"/>
-       </View>
-   )
+        <View className="size-full justify-center items-center mt-4 rounded-full">
+            <Image source={icon} tintColor='#a8b5db' className="size-5" />
+        </View>
+    )
 }
 
 const _Layout = () => {
+    const insets = useSafeAreaInsets();
     return (
         <Tabs
-        screenOptions={{
-tabBarShowLabel: false,
-tabBarItemStyle:{
-    width:'100%',
-    height:"100%",
-    justifyContent: "center",
-    alignItems:"center"
-}, tabBarStyle:{
-    backgroundColor:"#0f0d23"
-    , 
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarItemStyle: {
+                    width: '100%',
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }, tabBarStyle: {
+                    backgroundColor: "#0f0d23",
+                    borderRadius: 50,
+                    marginHorizontal: 20,
+                    // marginBottom:25.,
+                    // height: 52,
+                    paddingBottom: insets.bottom > 0 ? 0 : 10,
+                    marginBottom: insets.bottom + 10, // Add safe area inset
+                    height: 52,       // Expand height to include inset
+                    position: "absolute",
+                    overflow: "hidden",
+                    borderWidth: 1,
+                    borderColor: "#0f0d23"
+                }
 
-    borderRadius: 50,
-    marginHorizontal:20,
-    marginBottom:25.,
-    height: 52,
-    position:"absolute",
-    overflow:"hidden",
-    borderWidth: 1,
-    borderColor: "#0f0d23"
-}
 
-
-        }}
+            }}
         >
             <Tabs.Screen
                 name='index'
                 options={{
                     headerShown: false,
                     title: "Home",
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
                             icon={icons.home}
@@ -74,7 +77,7 @@ tabBarItemStyle:{
                 options={{
                     headerShown: false,
                     title: "Search",
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
                             icon={icons.search}
@@ -88,7 +91,7 @@ tabBarItemStyle:{
                 options={{
                     headerShown: false,
                     title: "Saved",
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
                             icon={icons.save}
@@ -102,7 +105,7 @@ tabBarItemStyle:{
                 options={{
                     headerShown: false,
                     title: "Profile",
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
                             icon={icons.person}

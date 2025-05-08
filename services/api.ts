@@ -1,12 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
+
+const { EXPO_PUBLIC_MOVIE_API_KEY, EXPO_PUBLIC_TMDB_API_KEY } =
+  Constants.expoConfig?.extra ?? {};
+console.log("API KEY:", Constants.expoConfig?.extra?.EXPO_PUBLIC_MOVIE_API_KEY);
 
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
-  API_KEY: process.env.EXPO_PUBLIC_MOVIE_API_KEY,
-  TMDB_API_KEY: process.env.EXPO_PUBLIC_TMDB_API_KEY,
+  API_KEY: EXPO_PUBLIC_MOVIE_API_KEY,
+  TMDB_API_KEY: EXPO_PUBLIC_TMDB_API_KEY,
   headers: {
     accept: "application/json",
-    Authorization: `Bearer ${process.env.EXPO_PUBLIC_MOVIE_API_KEY}`,
+    Authorization: `Bearer ${EXPO_PUBLIC_MOVIE_API_KEY}`,
   },
 };
 
